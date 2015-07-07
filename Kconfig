@@ -48,3 +48,7 @@ endmenu
 menu "System Libraries and NSH Add-Ons"
 source "$APPSDIR/system/Kconfig"
 endmenu
+
+menu "Tests"
+source "$APPSDIR/tests/Kconfig"
+endmenu

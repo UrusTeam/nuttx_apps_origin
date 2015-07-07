@@ -1,0 +1,13 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+if LICENSE_APACHE2_0
+config TESTS_CMOCKA
+	bool "cmocka unit testing framework"
+	default n
+	---help---
+		Enable the cmocka testing framework
+endif
+if TESTS_CMOCKA
+endif

@@ -1,0 +1,174 @@
+From 8dd71c001dc2df2e7569b893de8e6ce3844f9077 Mon Sep 17 00:00:00 2001
+From: Brennan Ashton <brennan@ombitron.com>
+Date: Mon, 6 Jul 2015 16:20:11 -0700
+Subject: [PATCH] rename test main functions
+
+---
+ tests/test_alloc.c              | 2 +-
+ tests/test_assert_macros.c      | 4 ++--
+ tests/test_assert_macros_fail.c | 2 +-
+ tests/test_basics.c             | 2 +-
+ tests/test_cmockery.c           | 2 +-
+ tests/test_exception_handler.c  | 2 +-
+ tests/test_fixtures.c           | 2 +-
+ tests/test_group_fixtures.c     | 2 +-
+ tests/test_group_setup_fail.c   | 2 +-
+ tests/test_setup_fail.c         | 2 +-
+ tests/test_skip.c               | 2 +-
+ 11 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/tests/test_alloc.c b/tests/test_alloc.c
+index 966814a..f1a8cbb 100644
+--- a/tests/test_alloc.c
++++ b/tests/test_alloc.c
+@@ -80,7 +80,7 @@ static void torture_test_realloc_set0(void **state)
+     assert_null(str);
+ }
+ 
+-int main(void) {
++int test_alloc_main(void) {
+     const struct CMUnitTest alloc_tests[] = {
+         cmocka_unit_test(torture_test_malloc),
+         cmocka_unit_test(torture_test_realloc),
+diff --git a/tests/test_assert_macros.c b/tests/test_assert_macros.c
+index 85b0a38..35069af 100644
+--- a/tests/test_assert_macros.c
++++ b/tests/test_assert_macros.c
+@@ -24,7 +24,7 @@ static void test_assert_return_code(void **state)
+ 
+     (void)state; /* unused */
+ 
+-    rc = stat(".", &sb);
++    rc = stat("/", &sb);
+     assert_return_code(rc, 0);
+ 
+ #ifndef _MSC_VER
+@@ -32,7 +32,7 @@ static void test_assert_return_code(void **state)
+ #endif
+ }
+ 
+-int main(void) {
++int test_assert_macros_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test(test_assert_return_code),
+     };
+diff --git a/tests/test_assert_macros_fail.c b/tests/test_assert_macros_fail.c
+index aea919a..163a1fc 100644
+--- a/tests/test_assert_macros_fail.c
++++ b/tests/test_assert_macros_fail.c
+@@ -34,7 +34,7 @@ static void test_assert_return_code_fail(void **state)
+     }
+ }
+ 
+-int main(void) {
++int test_assert_macros_fail_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test(test_assert_return_code_fail),
+     };
+diff --git a/tests/test_basics.c b/tests/test_basics.c
+index 1bb493f..2e654d5 100644
+--- a/tests/test_basics.c
++++ b/tests/test_basics.c
+@@ -52,7 +52,7 @@ static void int_test_success(void **state) {
+ }
+ 
+ 
+-int main(void) {
++int test_basics_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test(null_test_success),
+         cmocka_unit_test_setup_teardown(int_test_success, setup, teardown),
+diff --git a/tests/test_cmockery.c b/tests/test_cmockery.c
+index 83a7451..b223d3c 100644
+--- a/tests/test_cmockery.c
++++ b/tests/test_cmockery.c
+@@ -24,7 +24,7 @@ static void null_test_success(void **state) {
+     (void) state; /* unused */
+ }
+ 
+-int main(void) {
++int test_cmockery_main(void) {
+     const UnitTest tests[] = {
+         unit_test(null_test_success),
+     };
+diff --git a/tests/test_exception_handler.c b/tests/test_exception_handler.c
+index 94c6842..5d7b2f8 100644
+--- a/tests/test_exception_handler.c
++++ b/tests/test_exception_handler.c
+@@ -19,7 +19,7 @@ static void test_segfault_recovery(void **state)
+     s->x = 1;
+ }
+ 
+-int main(void) {
++int test_exception_handler_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test(test_segfault_recovery),
+     };
+diff --git a/tests/test_fixtures.c b/tests/test_fixtures.c
+index 4597626..747c8e9 100644
+--- a/tests/test_fixtures.c
++++ b/tests/test_fixtures.c
+@@ -31,7 +31,7 @@ static void malloc_teardown_test(void **state)
+     assert_non_null(*state);
+ }
+ 
+-int main(void) {
++int test_fixtures_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test_setup(malloc_setup_test, setup_only),
+         cmocka_unit_test_setup(malloc_setup_test, setup_only),
+diff --git a/tests/test_group_fixtures.c b/tests/test_group_fixtures.c
+index 09f39b1..b8a9971 100644
+--- a/tests/test_group_fixtures.c
++++ b/tests/test_group_fixtures.c
+@@ -38,7 +38,7 @@ static void test_value_range(void **state)
+     assert_in_range(a, 0, 100);
+ }
+ 
+-int main(void) {
++int test_group_fixtures_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test(test_value_equal),
+         cmocka_unit_test(test_value_range),
+diff --git a/tests/test_group_setup_fail.c b/tests/test_group_setup_fail.c
+index 7815c03..fb5b451 100644
+--- a/tests/test_group_setup_fail.c
++++ b/tests/test_group_setup_fail.c
+@@ -24,7 +24,7 @@ static void test_false(void **state)
+     assert_false(0);
+ }
+ 
+-int main(void) {
++int test_group_setup_fail_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test(test_true),
+         cmocka_unit_test(test_false),
+diff --git a/tests/test_setup_fail.c b/tests/test_setup_fail.c
+index e3f8df8..06ff3f3 100644
+--- a/tests/test_setup_fail.c
++++ b/tests/test_setup_fail.c
+@@ -44,7 +44,7 @@ static int teardown(void **state) {
+     return 0;
+ }
+ 
+-int main(void) {
++int test_setup_fail_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test_setup_teardown(int_test_ignored, setup_fail, teardown),
+         cmocka_unit_test_setup_teardown(int_test_success, setup_ok, teardown),
+diff --git a/tests/test_skip.c b/tests/test_skip.c
+index 127161a..fe5be38 100644
+--- a/tests/test_skip.c
++++ b/tests/test_skip.c
+@@ -29,7 +29,7 @@ static void test_check_skip(void **state) {
+ }
+ 
+ 
+-int main(void) {
++int test_skip_main(void) {
+     const struct CMUnitTest tests[] = {
+         cmocka_unit_test(test_check_skip),
+     };
+-- 
+2.1.0
+
