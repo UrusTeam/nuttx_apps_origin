@@ -3,6 +3,12 @@
 # see the file kconfig-language.txt in the NuttX tools repository.
 #
 
+menu "Additional Allowed Licenses"
+config LICENSE_APACHE2_0
+    bool "Apache 2.0"
+    default n
+endmenu
+
 menu "Built-In Applications"
 source "$APPSDIR/builtin/Kconfig"
 endmenu
